@@ -1,32 +1,21 @@
-export type MajorType = "All" | "IST" | "CE" | "ECE" | "PrE" | "AME";
-export type AcademicYear = 
-  | "All"
-  | "6th Year"
-  | "5th Year - 1st Sem"
-  | "5th Year - 2nd Sem"
-  | "5th Year"
-  | "4th Year"
-  | "3rd Year"
-  | "2nd Year"
-  | "1st Year"
-  | "";
-
 export interface Project {
   id: string;
   title: string;
-  major: Exclude<MajorType, "All">;
-  year: AcademicYear;
-  teamName: string;
-  shortSummary: string;
-  fullDescription: string;
-  teamMembers: string[];
-  advisor: string;
-  image: string;
-  featured?: boolean;
+  major: string;
+  year: string;
+  teamName?: string;
+  teamMembers?: string[];
+  advisor?: string;
+  shortSummary?: string;
+  fullDescription?: string;
+  image?: string;
+  category?: string;
+  technologies?: string[];
+  features?: string[];
 }
 
 export interface MajorInfo {
-  code: Exclude<MajorType, "All">;
+  code: string;
   fullName: string;
   description: string;
 }

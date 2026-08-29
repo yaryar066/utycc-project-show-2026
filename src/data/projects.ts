@@ -10,7 +10,7 @@ export const MAJORS_DATA: MajorInfo[] = [
 
 export const PROJECTS_DATA: Project[] = [
   // ==========================================
-  // 1. INFORMATION SCIENCE AND TECHNOLOGY (IST - 21 Projects)
+  // 1. IST (21 Projects)
   // ==========================================
   {
     id: "ist-01",
