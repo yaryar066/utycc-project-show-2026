@@ -42,6 +42,7 @@ export default function HomePage() {
     "3rd Year",
     "2nd Year",
     "1st Year",
+    "Other",
   ];
 
   const getMajorFallbackIcon = (code: string) => {

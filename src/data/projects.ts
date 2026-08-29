@@ -160,7 +160,7 @@ export const PROJECTS_DATA: Project[] = [
     id: "ist-14",
     title: "Crop Health Monitoring System for Remote Sensing Agriculture",
     major: "IST",
-    year: "5th Year - 2nd Sem",
+    year: "Other", // Updated to Other
     teamName: "Dr. Nyo Nyo Yee Team",
     teamMembers: ["Agricultural IoT Research Group"],
     advisor: "Dr. Nyo Nyo Yee",
@@ -172,7 +172,7 @@ export const PROJECTS_DATA: Project[] = [
     id: "ist-15",
     title: "Digital Reconstruction of Degraded Ancient Murals using Image Inpainting Techniques",
     major: "IST",
-    year: "5th Year - 2nd Sem",
+    year: "Other", // Updated to Other
     teamName: "Dr. Khant Khant Win Tint Team",
     teamMembers: ["Digital Heritage Lab Group"],
     advisor: "Dr. Khant Khant Win Tint",
