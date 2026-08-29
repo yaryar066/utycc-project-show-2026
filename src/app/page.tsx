@@ -19,7 +19,7 @@ import {
   Wrench,
   ArrowUpRight,
   UserCheck,
-  ImageIcon,
+  Camera,
 } from "lucide-react";
 
 export default function HomePage() {
@@ -590,7 +590,7 @@ export default function HomePage() {
                   
                   <div className="absolute bottom-3 left-3 flex items-center gap-2">
                     <span className="px-3 py-1 rounded-lg bg-slate-950/80 backdrop-blur-md border border-cyan-400/40 text-cyan-300 font-mono text-[11px] font-bold uppercase inline-flex items-center gap-1.5">
-                      <ImageIcon className="w-3.5 h-3.5 text-cyan-400" />
+                      <Camera className="w-3.5 h-3.5 text-cyan-400" />
                       PROJECT EXHIBIT PHOTO
                     </span>
                   </div>
