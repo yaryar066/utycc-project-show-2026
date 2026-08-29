@@ -45,6 +45,7 @@ export default function HomePage() {
     "Other",
   ];
 
+  // Dynamically calculate only the years that actually have projects for the selected major
   const dynamicYearFilters = useMemo(() => {
     const projectsInMajor =
       selectedMajor === "All"
@@ -59,6 +60,7 @@ export default function HomePage() {
     return ["All", ...activeYears];
   }, [selectedMajor]);
 
+  // Handle major selection & reset year if the currently selected year does not exist in the new major
   const handleMajorSelect = (major: string) => {
     setSelectedMajor(major);
     const projectsInNewMajor =
@@ -135,8 +137,12 @@ export default function HomePage() {
       <Navbar />
 
       <main className="flex-1 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 w-full">
-        {/* HERO SECTION */}
+        {/* ========================================================================= */}
+        {/* 1. HERO SECTION */}
+        {/* ========================================================================= */}
         <section id="hero" className="text-center py-8 sm:py-12 flex flex-col items-center">
+          
+          {/* Circular University Crest */}
           <div className="relative mb-5 group">
             <div className="absolute inset-0 rounded-full bg-cyan-400/35 blur-xl group-hover:bg-cyan-400/55 transition-all duration-500 scale-125" />
             <div className="relative w-24 h-24 sm:w-28 sm:h-28 rounded-full border-2 border-cyan-400 bg-white shadow-[0_0_30px_rgba(6,182,212,0.5)] overflow-hidden flex items-center justify-center p-1.5">
@@ -153,6 +159,7 @@ export default function HomePage() {
             </div>
           </div>
 
+          {/* University Name */}
           <div className="mb-4">
             <h2 className="text-xl sm:text-2xl md:text-3xl font-black text-white tracking-wide">
               University of Technology
@@ -162,6 +169,7 @@ export default function HomePage() {
             </span>
           </div>
 
+          {/* Main Exhibition Title */}
           <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight leading-tight max-w-4xl mx-auto">
             Innovative Projects{" "}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-teal-300 block sm:inline">
@@ -169,6 +177,7 @@ export default function HomePage() {
             </span>
           </h1>
 
+          {/* Exhibition Date Badge */}
           <div className="inline-flex items-center gap-2 px-5 py-1.5 rounded-full border border-cyan-500/50 bg-cyan-950/50 text-cyan-300 text-xs sm:text-sm font-bold tracking-widest uppercase mt-4 shadow-[0_0_20px_rgba(6,182,212,0.3)]">
             <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
             <span>31ST AUGUST 2026</span>
@@ -178,9 +187,10 @@ export default function HomePage() {
             Pioneering the Future of Technology: Advanced Engineering, Artificial Intelligence, Robotics, and Materials Science Research Innovations.
           </p>
 
+          {/* Action Buttons in Hero */}
           <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
             <a
-              href="https://vote.utyccfresher.online"
+              href="https://project-voting-utycc.vercel.app/"
               target="_blank"
               rel="noopener noreferrer"
               className="px-7 py-3.5 rounded-2xl bg-gradient-to-r from-teal-400 via-cyan-400 to-blue-500 hover:from-teal-300 hover:to-cyan-300 text-slate-950 font-bold text-sm tracking-wide uppercase transition-all shadow-[0_0_25px_rgba(6,182,212,0.5)] active:scale-95 flex items-center justify-center cursor-pointer"
@@ -204,7 +214,9 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* CAMPUS SHOWCASE BANNER */}
+        {/* ========================================================================= */}
+        {/* 2. CAMPUS SHOWCASE BANNER */}
+        {/* ========================================================================= */}
         <section className="py-6 sm:py-8 w-full">
           <div className="relative w-full h-56 sm:h-80 md:h-96 rounded-3xl overflow-hidden border border-cyan-500/30 shadow-[0_0_40px_rgba(6,182,212,0.25)] group">
             <Image
@@ -227,7 +239,9 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* MAJORS OVERVIEW SECTION */}
+        {/* ========================================================================= */}
+        {/* 3. MAJORS OVERVIEW SECTION */}
+        {/* ========================================================================= */}
         <section id="majors" className="py-10 border-t border-cyan-500/20">
           <div className="text-center mb-8">
             <h2 className="text-xl sm:text-2xl font-bold uppercase text-white tracking-wide">
@@ -298,7 +312,9 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* SHOWCASE & FILTER SECTION */}
+        {/* ========================================================================= */}
+        {/* 4. SHOWCASE & FILTER SECTION */}
+        {/* ========================================================================= */}
         <section id="showcase" className="py-12 border-t border-cyan-500/20">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
             <div>
@@ -322,8 +338,9 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* Filter Bar */}
+          {/* Dynamic Filter Bar */}
           <div className="glass-panel border border-cyan-500/25 rounded-2xl p-5 mb-8 space-y-4">
+            {/* Major Filter */}
             <div>
               <div className="text-[11px] font-mono font-bold text-cyan-400 tracking-wider uppercase mb-2">
                 [ MAJOR ]
@@ -348,6 +365,7 @@ export default function HomePage() {
               </div>
             </div>
 
+            {/* Dynamic Class & Semester Filter */}
             {dynamicYearFilters.length > 1 && (
               <div>
                 <div className="text-[11px] font-mono font-bold text-cyan-400 tracking-wider uppercase mb-2">
@@ -374,6 +392,7 @@ export default function HomePage() {
               </div>
             )}
 
+            {/* Total Results & Reset */}
             <div className="flex items-center justify-between pt-3 border-t border-cyan-500/15 text-xs font-mono">
               <span className="text-slate-300">
                 Showing <span className="font-bold text-cyan-400">{filteredProjects.length}</span> projects
@@ -398,6 +417,7 @@ export default function HomePage() {
                 }}
                 className="group relative rounded-3xl bg-slate-900/90 border border-cyan-500/30 hover:border-cyan-400 overflow-hidden cursor-pointer transition-all duration-300 hover:shadow-[0_0_25px_rgba(6,182,212,0.35)] hover:-translate-y-1 flex flex-col justify-between"
               >
+                {/* Photo Frame Container with Multi-Path Fallback */}
                 <div className="relative w-full h-52 overflow-hidden bg-slate-950 flex-shrink-0 flex items-center justify-center">
                   <img
                     src={project.image}
@@ -432,6 +452,7 @@ export default function HomePage() {
                   </div>
                 </div>
 
+                {/* Content */}
                 <div className="p-5 flex-1 flex flex-col justify-between space-y-4">
                   <div>
                     <h3 className="text-base font-extrabold text-white group-hover:text-cyan-300 transition-colors line-clamp-2 leading-snug">
@@ -481,13 +502,16 @@ export default function HomePage() {
         </section>
       </main>
 
-      {/* PROJECT SPECIFICATION MODAL */}
+      {/* ========================================================================= */}
+      {/* 5. PROJECT SPECIFICATION MODAL */}
+      {/* ========================================================================= */}
       {selectedProject && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-0 sm:p-4 lg:p-6 bg-slate-950/85 backdrop-blur-xl animate-in fade-in duration-200 overflow-y-auto">
           <div
             className="relative w-full max-w-4xl bg-slate-900 border border-cyan-500/40 rounded-none sm:rounded-3xl shadow-[0_0_50px_rgba(6,182,212,0.25)] overflow-hidden flex flex-col max-h-screen sm:max-h-[90vh] my-auto"
             onClick={(e) => e.stopPropagation()}
           >
+            {/* Modal Banner */}
             <div className="relative w-full bg-gradient-to-br from-cyan-950 via-slate-900 to-slate-950 flex flex-col justify-end p-6 sm:p-8 overflow-hidden flex-shrink-0 border-b border-cyan-500/20">
               <div className="absolute -right-20 -top-20 w-80 h-80 bg-cyan-500/20 rounded-full blur-3xl pointer-events-none" />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/60 to-transparent" />
@@ -526,10 +550,13 @@ export default function HomePage() {
               </div>
             </div>
 
+            {/* Modal Content */}
             <div className="flex-1 overflow-y-auto p-6 sm:p-8 space-y-6">
+              
+              {/* Vote Button */}
               <div className="flex items-center">
                 <a
-                  href="https://vote.utyccfresher.online"
+                  href="https://project-voting-utycc.vercel.app/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-teal-400 via-cyan-400 to-blue-500 text-slate-950 font-bold text-xs sm:text-sm uppercase tracking-wide flex items-center justify-center cursor-pointer shadow-[0_0_15px_rgba(6,182,212,0.4)] active:scale-95 transition-all"
@@ -538,6 +565,7 @@ export default function HomePage() {
                 </a>
               </div>
 
+              {/* PROJECT EXHIBIT PHOTO PREVIEW */}
               {selectedProject.image && (
                 <div className="relative w-full h-64 sm:h-80 md:h-96 rounded-2xl overflow-hidden border border-cyan-500/30 bg-slate-950 shadow-[0_0_25px_rgba(6,182,212,0.2)] group">
                   <img
@@ -569,6 +597,7 @@ export default function HomePage() {
                 </div>
               )}
 
+              {/* Tabs Navigation */}
               <div className="flex items-center gap-2 border-b border-cyan-500/20 pb-3">
                 <button
                   onClick={() => setActiveTab("overview")}
@@ -607,6 +636,7 @@ export default function HomePage() {
                 </button>
               </div>
 
+              {/* Tab 1: Overview */}
               {activeTab === "overview" && (
                 <div className="space-y-6 animate-in fade-in duration-150">
                   <div>
@@ -640,6 +670,7 @@ export default function HomePage() {
                 </div>
               )}
 
+              {/* Tab 2: Specifications */}
               {activeTab === "features" && (
                 <div className="space-y-6 animate-in fade-in duration-150">
                   <div>
@@ -672,6 +703,7 @@ export default function HomePage() {
                 </div>
               )}
 
+              {/* Tab 3: Team & Faculty */}
               {activeTab === "team" && (
                 <div className="space-y-6 animate-in fade-in duration-150">
                   {selectedProject.teamName ? (
@@ -717,6 +749,7 @@ export default function HomePage() {
               )}
             </div>
 
+            {/* Modal Footer */}
             <div className="p-4 sm:p-6 bg-slate-950/90 border-t border-cyan-500/20 flex items-center justify-between">
               <span className="text-xs text-slate-400 hidden sm:inline">
                 Click anywhere outside or press Close to return
