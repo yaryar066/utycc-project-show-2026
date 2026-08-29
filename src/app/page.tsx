@@ -35,6 +35,7 @@ export default function HomePage() {
 
   const standardYearOrder = [
     "6th Year",
+    "5th Year",
     "5th Year - 1st Sem",
     "5th Year - 2nd Sem",
     "4th Year",
@@ -93,7 +94,9 @@ export default function HomePage() {
         project.major.toUpperCase() === selectedMajor.toUpperCase();
 
       const matchesYear =
-        selectedYear === "All" || project.year === selectedYear;
+        selectedYear === "All" ||
+        project.year === selectedYear ||
+        (project.year === "All" && selectedYear === "All");
 
       const query = searchQuery.toLowerCase().trim();
       const matchesSearch =
@@ -335,7 +338,7 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* Dynamic Filter Bar */}
+          {/* Filter Bar */}
           <div className="glass-panel border border-cyan-500/25 rounded-2xl p-5 mb-8 space-y-4">
             {/* Major Filter */}
             <div>
@@ -362,30 +365,32 @@ export default function HomePage() {
               </div>
             </div>
 
-            {/* Dynamic Class & Semester Filter (Shows only existing years for the active major) */}
-            <div>
-              <div className="text-[11px] font-mono font-bold text-cyan-400 tracking-wider uppercase mb-2">
-                [ CLASS & SEMESTER ]
+            {/* Dynamic Class & Semester Filter */}
+            {dynamicYearFilters.length > 1 && (
+              <div>
+                <div className="text-[11px] font-mono font-bold text-cyan-400 tracking-wider uppercase mb-2">
+                  [ CLASS & SEMESTER ]
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  {dynamicYearFilters.map((year) => {
+                    const isActive = selectedYear === year;
+                    return (
+                      <button
+                        key={year}
+                        onClick={() => setSelectedYear(year)}
+                        className={`px-3.5 py-1.5 rounded-xl text-xs font-mono font-bold transition-all cursor-pointer ${
+                          isActive
+                            ? "bg-cyan-500 text-slate-950 shadow-[0_0_15px_rgba(6,182,212,0.4)] scale-105"
+                            : "bg-slate-900 border border-cyan-500/30 text-slate-300 hover:text-white hover:border-cyan-400"
+                        }`}
+                      >
+                        {year}
+                      </button>
+                    );
+                  })}
+                </div>
               </div>
-              <div className="flex flex-wrap gap-2">
-                {dynamicYearFilters.map((year) => {
-                  const isActive = selectedYear === year;
-                  return (
-                    <button
-                      key={year}
-                      onClick={() => setSelectedYear(year)}
-                      className={`px-3.5 py-1.5 rounded-xl text-xs font-mono font-bold transition-all cursor-pointer ${
-                        isActive
-                          ? "bg-cyan-500 text-slate-950 shadow-[0_0_15px_rgba(6,182,212,0.4)] scale-105"
-                          : "bg-slate-900 border border-cyan-500/30 text-slate-300 hover:text-white hover:border-cyan-400"
-                      }`}
-                    >
-                      {year}
-                    </button>
-                  );
-                })}
-              </div>
-            </div>
+            )}
 
             {/* Total Results & Reset */}
             <div className="flex items-center justify-between pt-3 border-t border-cyan-500/15 text-xs font-mono">
@@ -439,9 +444,11 @@ export default function HomePage() {
                     <span className="px-2.5 py-1 rounded-lg bg-slate-950/85 backdrop-blur-md border border-cyan-500/40 text-cyan-300 font-mono text-[11px] font-bold">
                       {project.major}
                     </span>
-                    <span className="px-2.5 py-1 rounded-lg bg-slate-950/85 backdrop-blur-md border border-cyan-500/40 text-cyan-300 font-mono text-[11px] font-bold">
-                      {project.year}
-                    </span>
+                    {project.year !== "All" && (
+                      <span className="px-2.5 py-1 rounded-lg bg-slate-950/85 backdrop-blur-md border border-cyan-500/40 text-cyan-300 font-mono text-[11px] font-bold">
+                        {project.year}
+                      </span>
+                    )}
                   </div>
                 </div>
 
@@ -458,10 +465,16 @@ export default function HomePage() {
 
                   <div className="pt-3 border-t border-cyan-500/15 flex items-center justify-between text-xs">
                     <div className="flex items-center gap-2 text-slate-300 font-mono text-[11px] truncate max-w-[210px]">
-                      <Users className="w-3.5 h-3.5 text-cyan-400 flex-shrink-0" />
-                      <span className="truncate">
-                        {project.teamName || project.teamMembers?.[0] || "Engineering Team"}
-                      </span>
+                      {project.teamName ? (
+                        <>
+                          <Users className="w-3.5 h-3.5 text-cyan-400 flex-shrink-0" />
+                          <span className="truncate">{project.teamName}</span>
+                        </>
+                      ) : (
+                        <span className="text-cyan-400 font-bold tracking-wide">
+                          {project.major} Faculty
+                        </span>
+                      )}
                     </div>
 
                     <div className="w-8 h-8 rounded-full bg-cyan-500/15 border border-cyan-400/40 text-cyan-400 group-hover:bg-cyan-400 group-hover:text-slate-950 flex items-center justify-center transition-all shadow-sm flex-shrink-0">
@@ -490,7 +503,7 @@ export default function HomePage() {
       </main>
 
       {/* ========================================================================= */}
-      {/* 5. PROJECT SPECIFICATION MODAL (With Full Exhibit Photo Preview) */}
+      {/* 5. PROJECT SPECIFICATION MODAL */}
       {/* ========================================================================= */}
       {selectedProject && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-0 sm:p-4 lg:p-6 bg-slate-950/85 backdrop-blur-xl animate-in fade-in duration-200 overflow-y-auto">
@@ -508,9 +521,11 @@ export default function HomePage() {
                   <span className="px-3 py-1 rounded-full bg-cyan-500 text-slate-950 font-extrabold text-xs tracking-wider uppercase shadow-[0_0_12px_rgba(6,182,212,0.5)]">
                     {selectedProject.major}
                   </span>
-                  <span className="px-3 py-1 rounded-full bg-slate-950/80 border border-cyan-500/30 text-cyan-300 font-mono text-xs">
-                    {selectedProject.year}
-                  </span>
+                  {selectedProject.year !== "All" && (
+                    <span className="px-3 py-1 rounded-full bg-slate-950/80 border border-cyan-500/30 text-cyan-300 font-mono text-xs">
+                      {selectedProject.year}
+                    </span>
+                  )}
                 </div>
 
                 <button
@@ -617,7 +632,7 @@ export default function HomePage() {
                   }`}
                 >
                   <Users className="w-4 h-4" />
-                  <span>Team & Advisor</span>
+                  <span>Faculty & Advisor</span>
                 </button>
               </div>
 
@@ -648,7 +663,7 @@ export default function HomePage() {
                         CLASS & YEAR
                       </span>
                       <p className="text-sm font-bold text-white">
-                        {selectedProject.year}
+                        {selectedProject.year !== "All" ? selectedProject.year : `${selectedProject.major} Department`}
                       </p>
                     </div>
                   </div>
@@ -675,9 +690,11 @@ export default function HomePage() {
                       <span className="px-3.5 py-1.5 rounded-xl bg-slate-950 border border-cyan-500/30 text-xs text-cyan-300 font-mono">
                         {selectedProject.major}
                       </span>
-                      <span className="px-3.5 py-1.5 rounded-xl bg-slate-950 border border-cyan-500/30 text-xs text-cyan-300 font-mono">
-                        {selectedProject.year}
-                      </span>
+                      {selectedProject.year !== "All" && (
+                        <span className="px-3.5 py-1.5 rounded-xl bg-slate-950 border border-cyan-500/30 text-xs text-cyan-300 font-mono">
+                          {selectedProject.year}
+                        </span>
+                      )}
                       <span className="px-3.5 py-1.5 rounded-xl bg-slate-950 border border-cyan-500/30 text-xs text-cyan-300 font-mono">
                         EXHIBITION 2026
                       </span>
@@ -686,31 +703,33 @@ export default function HomePage() {
                 </div>
               )}
 
-              {/* Tab 3: Team */}
+              {/* Tab 3: Team & Faculty */}
               {activeTab === "team" && (
                 <div className="space-y-6 animate-in fade-in duration-150">
-                  <div>
-                    <h4 className="text-xs font-bold text-cyan-400 uppercase tracking-wider mb-3 font-mono">
-                      Project Author(s) / Team
-                    </h4>
-                    <div className="p-4 rounded-xl bg-slate-950/60 border border-cyan-500/25 flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-full bg-cyan-500/20 border border-cyan-400/40 flex items-center justify-center font-bold text-cyan-300 text-sm">
-                        <Users className="w-5 h-5" />
-                      </div>
-                      <div>
-                        <p className="text-sm font-bold text-white">
-                          {selectedProject.teamName || selectedProject.teamMembers?.join(", ") || "Engineering Student Group"}
-                        </p>
-                        <span className="text-[11px] text-slate-400">
-                          {selectedProject.year} • Department of {selectedProject.major}
-                        </span>
+                  {selectedProject.teamName ? (
+                    <div>
+                      <h4 className="text-xs font-bold text-cyan-400 uppercase tracking-wider mb-3 font-mono">
+                        Project Author(s) / Team
+                      </h4>
+                      <div className="p-4 rounded-xl bg-slate-950/60 border border-cyan-500/25 flex items-center gap-3">
+                        <div className="w-10 h-10 rounded-full bg-cyan-500/20 border border-cyan-400/40 flex items-center justify-center font-bold text-cyan-300 text-sm">
+                          <Users className="w-5 h-5" />
+                        </div>
+                        <div>
+                          <p className="text-sm font-bold text-white">
+                            {selectedProject.teamName}
+                          </p>
+                          <span className="text-[11px] text-slate-400">
+                            {selectedProject.year !== "All" ? selectedProject.year : ""} • Department of {selectedProject.major}
+                          </span>
+                        </div>
                       </div>
                     </div>
-                  </div>
+                  ) : null}
 
                   <div>
                     <h4 className="text-xs font-bold text-cyan-400 uppercase tracking-wider mb-2 font-mono">
-                      Faculty Advisor / Supervisor
+                      Faculty / Department
                     </h4>
                     <div className="p-4 rounded-xl bg-slate-950/60 border border-cyan-500/25 flex items-center gap-3">
                       <div className="w-10 h-10 rounded-full bg-teal-500/20 border border-teal-400/40 flex items-center justify-center font-bold text-teal-300 text-sm">
@@ -721,7 +740,7 @@ export default function HomePage() {
                           {selectedProject.advisor || "Faculty of " + selectedProject.major}
                         </p>
                         <span className="text-[11px] text-slate-400">
-                          Department Advisor & Reviewer
+                          Department Faculty & Supervisors
                         </span>
                       </div>
                     </div>
