@@ -23,7 +23,7 @@ export const Navbar: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 sm:h-20">
           
-          {/* Clean Logo & Title (No box border, No date) */}
+          {/* Logo & Title (Title Case as requested) */}
           <Link 
             href="/" 
             className="flex items-center gap-3.5 group cursor-pointer"
@@ -48,11 +48,11 @@ export const Navbar: React.FC = () => {
             </div>
 
             <div className="flex flex-col justify-center">
-              <span className="text-sm sm:text-base md:text-lg font-black text-white tracking-wide group-hover:text-cyan-300 transition-colors uppercase leading-tight">
-                INNOVATIVE PROJECTS EXHIBITION
+              <span className="text-xs sm:text-base md:text-lg font-black text-white tracking-wide group-hover:text-cyan-300 transition-colors leading-tight">
+                Innovative Projects Exhibition -2026
               </span>
-              <span className="text-xs sm:text-sm font-bold text-cyan-400 tracking-wider leading-tight mt-0.5">
-                UTYCC - 2026
+              <span className="text-xs sm:text-sm font-extrabold text-cyan-400 tracking-widest leading-tight mt-0.5 uppercase">
+                UTYCC
               </span>
             </div>
           </Link>

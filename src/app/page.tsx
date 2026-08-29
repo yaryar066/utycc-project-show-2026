@@ -19,6 +19,7 @@ import {
   Wrench,
   ArrowUpRight,
   UserCheck,
+  ImageIcon,
 } from "lucide-react";
 
 export default function HomePage() {
@@ -369,7 +370,7 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* PROJECTS GRID (Using Reliable Next/Image) */}
+          {/* PROJECTS GRID */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredProjects.map((project) => (
               <div
@@ -378,31 +379,36 @@ export default function HomePage() {
                   setSelectedProject(project);
                   setActiveTab("overview");
                 }}
-                className="group relative rounded-3xl bg-slate-900/80 border border-cyan-500/25 hover:border-cyan-400/80 overflow-hidden cursor-pointer transition-all duration-300 hover:shadow-[0_0_25px_rgba(6,182,212,0.3)] hover:-translate-y-1 flex flex-col justify-between"
+                className="group relative rounded-3xl bg-slate-900/90 border border-cyan-500/30 hover:border-cyan-400 overflow-hidden cursor-pointer transition-all duration-300 hover:shadow-[0_0_25px_rgba(6,182,212,0.35)] hover:-translate-y-1 flex flex-col justify-between"
               >
-                {/* Image & Badges */}
-                <div className="relative w-full h-52 overflow-hidden bg-slate-950">
-                  {project.image ? (
-                    <Image
-                      src={project.image}
-                      alt={project.title}
-                      fill
-                      sizes="(max-width: 768px) 100vw, 33vw"
-                      className="object-cover group-hover:scale-105 transition-transform duration-500"
-                    />
-                  ) : (
-                    <div className="w-full h-full flex items-center justify-center text-xs font-mono text-slate-500">
-                      UTYCC PROJECT
-                    </div>
-                  )}
+                {/* Photo Frame Container with Multi-Path Fallback */}
+                <div className="relative w-full h-52 overflow-hidden bg-slate-950 flex-shrink-0 flex items-center justify-center">
+                  <img
+                    src={project.image}
+                    alt={project.title}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      const rawId = project.id;
+                      if (target.src.includes("/projects/")) {
+                        target.src = `/images/projects/${rawId}.png`;
+                      } else if (target.src.includes("/images/projects/")) {
+                        target.src = `/images/${rawId}.png`;
+                      } else if (target.src.endsWith(".png")) {
+                        target.src = `/projects/${rawId}.jpg`;
+                      } else {
+                        target.src = "/images/utycc-campus.jpg";
+                      }
+                    }}
+                  />
 
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-transparent to-black/40 pointer-events-none" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-transparent to-black/30 pointer-events-none" />
 
                   <div className="absolute top-3 left-3 right-3 flex items-center justify-between z-10 pointer-events-none">
-                    <span className="px-2.5 py-1 rounded-lg bg-slate-950/80 border border-cyan-500/40 text-cyan-300 font-mono text-[11px] font-bold">
+                    <span className="px-2.5 py-1 rounded-lg bg-slate-950/85 backdrop-blur-md border border-cyan-500/40 text-cyan-300 font-mono text-[11px] font-bold">
                       {project.major}
                     </span>
-                    <span className="px-2.5 py-1 rounded-lg bg-slate-950/80 border border-cyan-500/40 text-cyan-300 font-mono text-[11px] font-bold">
+                    <span className="px-2.5 py-1 rounded-lg bg-slate-950/85 backdrop-blur-md border border-cyan-500/40 text-cyan-300 font-mono text-[11px] font-bold">
                       {project.year}
                     </span>
                   </div>
@@ -453,7 +459,7 @@ export default function HomePage() {
       </main>
 
       {/* ========================================================================= */}
-      {/* 5. PROJECT SPECIFICATION MODAL */}
+      {/* 5. PROJECT SPECIFICATION MODAL (With Full Exhibit Photo Preview) */}
       {/* ========================================================================= */}
       {selectedProject && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-0 sm:p-4 lg:p-6 bg-slate-950/85 backdrop-blur-xl animate-in fade-in duration-200 overflow-y-auto">
@@ -462,11 +468,11 @@ export default function HomePage() {
             onClick={(e) => e.stopPropagation()}
           >
             {/* Modal Banner */}
-            <div className="relative w-full h-56 sm:h-72 bg-gradient-to-br from-cyan-950 via-slate-900 to-slate-950 flex items-end p-6 sm:p-8 overflow-hidden flex-shrink-0 border-b border-cyan-500/20">
+            <div className="relative w-full bg-gradient-to-br from-cyan-950 via-slate-900 to-slate-950 flex flex-col justify-end p-6 sm:p-8 overflow-hidden flex-shrink-0 border-b border-cyan-500/20">
               <div className="absolute -right-20 -top-20 w-80 h-80 bg-cyan-500/20 rounded-full blur-3xl pointer-events-none" />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/60 to-transparent" />
 
-              <div className="absolute top-4 left-4 right-4 flex items-center justify-between z-20">
+              <div className="flex items-center justify-between z-20 mb-4">
                 <div className="flex items-center gap-2">
                   <span className="px-3 py-1 rounded-full bg-cyan-500 text-slate-950 font-extrabold text-xs tracking-wider uppercase shadow-[0_0_12px_rgba(6,182,212,0.5)]">
                     {selectedProject.major}
@@ -500,6 +506,8 @@ export default function HomePage() {
 
             {/* Modal Content */}
             <div className="flex-1 overflow-y-auto p-6 sm:p-8 space-y-6">
+              
+              {/* Vote Button */}
               <div className="flex items-center">
                 <a
                   href="https://vote.utyccfresher.online"
@@ -511,6 +519,39 @@ export default function HomePage() {
                 </a>
               </div>
 
+              {/* PROJECT EXHIBIT PHOTO PREVIEW */}
+              {selectedProject.image && (
+                <div className="relative w-full h-64 sm:h-80 md:h-96 rounded-2xl overflow-hidden border border-cyan-500/30 bg-slate-950 shadow-[0_0_25px_rgba(6,182,212,0.2)] group">
+                  <img
+                    src={selectedProject.image}
+                    alt={selectedProject.title}
+                    className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700"
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      const rawId = selectedProject.id;
+                      if (target.src.includes("/projects/")) {
+                        target.src = `/images/projects/${rawId}.png`;
+                      } else if (target.src.includes("/images/projects/")) {
+                        target.src = `/images/${rawId}.png`;
+                      } else if (target.src.endsWith(".png")) {
+                        target.src = `/projects/${rawId}.jpg`;
+                      } else {
+                        target.src = "/images/utycc-campus.jpg";
+                      }
+                    }}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent pointer-events-none" />
+                  
+                  <div className="absolute bottom-3 left-3 flex items-center gap-2">
+                    <span className="px-3 py-1 rounded-lg bg-slate-950/80 backdrop-blur-md border border-cyan-400/40 text-cyan-300 font-mono text-[11px] font-bold uppercase inline-flex items-center gap-1.5">
+                      <ImageIcon className="w-3.5 h-3.5 text-cyan-400" />
+                      PROJECT EXHIBIT PHOTO
+                    </span>
+                  </div>
+                </div>
+              )}
+
+              {/* Tabs Navigation */}
               <div className="flex items-center gap-2 border-b border-cyan-500/20 pb-3">
                 <button
                   onClick={() => setActiveTab("overview")}

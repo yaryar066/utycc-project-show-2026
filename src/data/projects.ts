@@ -10,7 +10,7 @@ export const MAJORS_DATA: MajorInfo[] = [
 
 export const PROJECTS_DATA: Project[] = [
   // ==========================================
-  // 1. IST (20 Projects)
+  // 1. IST (21 Projects)
   // ==========================================
   {
     id: "ist-01",
@@ -148,7 +148,7 @@ export const PROJECTS_DATA: Project[] = [
     id: "ist-08",
     title: "AI and IoT-based Integrated Smart City Traffic Management and Public Safety System",
     major: "IST",
-    year: "5th Year - 2nd Sem", // Transferred to 5th Year 2nd Sem
+    year: "5th Year - 2nd Sem",
     teamName: "Innovatex",
     teamMembers: ["Innovatex Team"],
     advisor: "Department of IST Faculty",
@@ -251,6 +251,18 @@ export const PROJECTS_DATA: Project[] = [
     shortSummary: "Deep learning histological image analysis classifying appendicitis severity through cellular detection.",
     fullDescription: "A specialized computer-aided diagnostic tool analyzing histopathological biopsy slides to detect inflammatory white blood cell clustering and assist pathologists in acute appendicitis staging.",
     image: "/projects/ist-20.png"
+  },
+  {
+    id: "ist-21",
+    title: "Immersive Learning through Augmented Reality for Children's Quality Education",
+    major: "IST",
+    year: "6th Year",
+    teamName: "Young Visionaries",
+    teamMembers: ["Young Visionaries"],
+    advisor: "Department of IST Faculty",
+    shortSummary: "Interactive AR learning platform combining 3D models, 360° visualization, and multimedia for primary education.",
+    fullDescription: "An innovative augmented reality (AR) educational application designed to enhance foundational learning and vocabulary acquisition for young children through interactive 3D spatial models, 360-degree virtual environments, and engaging multimedia storytelling.",
+    image: "/projects/ist-21.png"
   },
 
   // ==========================================
