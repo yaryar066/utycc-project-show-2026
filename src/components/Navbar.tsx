@@ -19,17 +19,17 @@ export const Navbar: React.FC = () => {
   ];
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-cyan-500/25 bg-slate-950/85 backdrop-blur-xl transition-all">
+    <header className="sticky top-0 z-50 w-full border-b border-cyan-500/20 bg-slate-950/85 backdrop-blur-xl transition-all">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 sm:h-20">
           
-          {/* Logo & University Branding */}
+          {/* Clean Logo & Title (No box border, No date) */}
           <Link 
             href="/" 
-            className="flex items-center gap-3 min-w-0 group cursor-pointer"
+            className="flex items-center gap-3.5 group cursor-pointer"
             onClick={() => setMobileMenuOpen(false)}
           >
-            <div className="relative w-10 h-10 sm:w-11 sm:h-11 rounded-full border border-cyan-400/50 overflow-hidden flex-shrink-0 bg-slate-950 shadow-[0_0_15px_rgba(6,182,212,0.3)] group-hover:border-cyan-400 group-hover:shadow-[0_0_20px_rgba(6,182,212,0.5)] transition-all">
+            <div className="relative w-10 h-10 sm:w-12 sm:h-12 rounded-full overflow-hidden flex-shrink-0 bg-white shadow-[0_0_15px_rgba(6,182,212,0.35)] p-1 flex items-center justify-center">
               {!logoError ? (
                 <Image
                   src="/logos/utycc.png"
@@ -37,22 +37,22 @@ export const Navbar: React.FC = () => {
                   fill
                   sizes="48px"
                   priority
-                  className="object-cover"
+                  className="object-contain"
                   onError={() => setLogoError(true)}
                 />
               ) : (
-                <div className="w-full h-full flex items-center justify-center bg-slate-900">
+                <div className="w-full h-full flex items-center justify-center bg-slate-900 rounded-full">
                   <div className="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-ping" />
                 </div>
               )}
             </div>
 
-            <div className="min-w-0 flex flex-col justify-center">
-              <span className="text-sm sm:text-base font-extrabold text-white tracking-wide truncate group-hover:text-cyan-300 transition-colors uppercase leading-tight">
-                UTYCC PROJECT SHOW
+            <div className="flex flex-col justify-center">
+              <span className="text-sm sm:text-base md:text-lg font-black text-white tracking-wide group-hover:text-cyan-300 transition-colors uppercase leading-tight">
+                INNOVATIVE PROJECTS EXHIBITION
               </span>
-              <span className="text-[10px] sm:text-xs text-cyan-400 font-semibold tracking-wider leading-tight mt-0.5">
-                AUGUST 31, 2026
+              <span className="text-xs sm:text-sm font-bold text-cyan-400 tracking-wider leading-tight mt-0.5">
+                UTYCC - 2026
               </span>
             </div>
           </Link>
@@ -65,7 +65,7 @@ export const Navbar: React.FC = () => {
                 <Link
                   key={link.name}
                   href={link.href}
-                  className={`relative px-4 py-2 rounded-xl text-sm transition-all duration-300 cursor-pointer ${
+                  className={`px-4 py-2 rounded-xl text-sm transition-all duration-300 cursor-pointer ${
                     isActive
                       ? "bg-cyan-500/20 text-cyan-300 border border-cyan-400/40 shadow-[0_0_15px_rgba(6,182,212,0.35)]"
                       : "text-slate-300 hover:text-white hover:bg-cyan-500/15 hover:border hover:border-cyan-400/30 border border-transparent active:scale-95"
