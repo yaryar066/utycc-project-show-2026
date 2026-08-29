@@ -33,8 +33,7 @@ export default function HomePage() {
 
   const majorFilters = ["All", "IST", "CE", "ECE", "PrE", "AME"];
 
-  const yearFilters = [
-    "All",
+  const standardYearOrder = [
     "6th Year",
     "5th Year - 1st Sem",
     "5th Year - 2nd Sem",
@@ -44,6 +43,37 @@ export default function HomePage() {
     "1st Year",
     "Other",
   ];
+
+  // Dynamically calculate only the years that actually have projects for the selected major
+  const dynamicYearFilters = useMemo(() => {
+    const projectsInMajor =
+      selectedMajor === "All"
+        ? PROJECTS_DATA
+        : PROJECTS_DATA.filter(
+            (p) => p.major.toUpperCase() === selectedMajor.toUpperCase()
+          );
+
+    const availableYearsSet = new Set(projectsInMajor.map((p) => p.year));
+    const activeYears = standardYearOrder.filter((y) => availableYearsSet.has(y));
+
+    return ["All", ...activeYears];
+  }, [selectedMajor]);
+
+  // Handle major selection & reset year if the currently selected year does not exist in the new major
+  const handleMajorSelect = (major: string) => {
+    setSelectedMajor(major);
+    const projectsInNewMajor =
+      major === "All"
+        ? PROJECTS_DATA
+        : PROJECTS_DATA.filter(
+            (p) => p.major.toUpperCase() === major.toUpperCase()
+          );
+    const availableYearsSet = new Set(projectsInNewMajor.map((p) => p.year));
+
+    if (selectedYear !== "All" && !availableYearsSet.has(selectedYear)) {
+      setSelectedYear("All");
+    }
+  };
 
   const getMajorFallbackIcon = (code: string) => {
     switch (code) {
@@ -229,7 +259,7 @@ export default function HomePage() {
                 <div
                   key={major.code}
                   onClick={() => {
-                    setSelectedMajor(major.code);
+                    handleMajorSelect(major.code);
                     const el = document.getElementById("showcase");
                     if (el) el.scrollIntoView({ behavior: "smooth" });
                   }}
@@ -305,7 +335,7 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* Filter Bar */}
+          {/* Dynamic Filter Bar */}
           <div className="glass-panel border border-cyan-500/25 rounded-2xl p-5 mb-8 space-y-4">
             {/* Major Filter */}
             <div>
@@ -318,7 +348,7 @@ export default function HomePage() {
                   return (
                     <button
                       key={major}
-                      onClick={() => setSelectedMajor(major)}
+                      onClick={() => handleMajorSelect(major)}
                       className={`px-4 py-1.5 rounded-xl text-xs font-mono font-bold transition-all cursor-pointer ${
                         isActive
                           ? "bg-cyan-500 text-slate-950 shadow-[0_0_15px_rgba(6,182,212,0.4)] scale-105"
@@ -332,13 +362,13 @@ export default function HomePage() {
               </div>
             </div>
 
-            {/* Class & Semester Filter */}
+            {/* Dynamic Class & Semester Filter (Shows only existing years for the active major) */}
             <div>
               <div className="text-[11px] font-mono font-bold text-cyan-400 tracking-wider uppercase mb-2">
                 [ CLASS & SEMESTER ]
               </div>
               <div className="flex flex-wrap gap-2">
-                {yearFilters.map((year) => {
+                {dynamicYearFilters.map((year) => {
                   const isActive = selectedYear === year;
                   return (
                     <button
