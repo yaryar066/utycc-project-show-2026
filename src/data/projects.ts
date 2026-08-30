@@ -286,7 +286,7 @@ export const PROJECTS_DATA: Project[] = [
   },
 
   // ==========================================
-  // 2. COMPUTER ENGINEERING (CE - 21 Projects)
+  // 2. COMPUTER ENGINEERING (CE - 23 Projects)
   // ==========================================
   {
     id: "ce-01",
@@ -539,6 +539,30 @@ export const PROJECTS_DATA: Project[] = [
     shortSummary: "Major ရွေးချယ်မှု၊ ကျောင်းတွင်းလမ်းညွှန်ချက်များနှင့် အနာဂတ် အလုပ်အကိုင် အခွင့်အလမ်းများကို စုစည်းပြသပေးသော Digital Platform ဖြစ်ပါသည်။",
     fullDescription: "UTYCC GUIDANCE စနစ်သည် Major ရွေးချယ်မှုဆိုင်ရာ အကြံပြုချက်များ ပေးခြင်း၊ တက္ကသိုလ် ပရိဝုဏ်ဆိုင်ရာ လမ်းညွှန်ချက်များ ထောက်ပံ့ပေးခြင်းနှင့် အနာဂတ် အလုပ်အကိုင် အခွင့်အလမ်းများကို တစ်နေရာတည်းတွင် စုစည်းပြသပေးရန် တည်ဆောက်ထားသော Digital Platform တစ်ခု အဖြစ် ဖန်တီးထားပါသည်။",
     image: "/projects/ce-21.png"
+  },
+  {
+    id: "ce-22",
+    title: "Student Management System",
+    major: "CE",
+    year: "1st Year",
+    teamName: "1CE",
+    teamMembers: ["1CE"],
+    advisor: "Department of CE Faculty",
+    shortSummary: "Student Exam Result၊ Result Table၊ Ranking နှင့် Major Allocation များကို စနစ်တကျ လွယ်ကူမြန်ဆန်စွာ စီမံခန့်ခွဲနိုင်သည့် စနစ်ဖြစ်ပါသည်။",
+    fullDescription: "Student Exam Result ၊ Result Table၊ Ranking နှင့် Major Allocation များကို စနစ်တကျ လွယ်ကူမြန်ဆန်စွာ စီမံခန့်ခွဲနိုင်သည့်အပြင် Academic Information၊ Subject၊ Cut-off နှင့် Major Preference များကို သတ်မှတ်ခြင်း၊ Result များကို PDF Export နှင့် Print ပြုလုပ်ခြင်းတို့ဖြင့် Result Management လုပ်ငန်းများကို ပိုမိုထိရောက်စွာ ဆောင်ရွက်နိုင်စေသော စနစ်တစ်ခုဖြစ်ပါသည်။",
+    image: "/projects/ce-22.png"
+  },
+  {
+    id: "ce-23",
+    title: "UTYCC Information Telegram Bot",
+    major: "CE",
+    year: "1st Year",
+    teamName: "1CE",
+    teamMembers: ["1CE"],
+    advisor: "Department of CE Faculty",
+    shortSummary: "UTYCC တက္ကသိုလ်အသိုင်းအဝိုင်းအတွက် မေးလေ့ရှိသော မေးခွန်းများကို အလိုအလျောက် ဖြေကြားပေးပြီး သတင်းအချက်အလက်များ ရရှိစေနိုင်သော Telegram Bot ဖြစ်ပါသည်။",
+    fullDescription: "UTYCC တက္ကသိုလ်အသိုင်းအဝိုင်းအတွက် မေးလေ့ရှိသောမေးခွန်းများကို အလိုအလျောက်ဖြေကြားပေးပြီး တက္ကသိုလ်ဆိုင်ရာ သတင်းအချက်အလက်များကို မြန်ဆန်လွယ်ကူစွာ ရရှိနိုင်စေရန်နှင့် စီမံခန့်ခွဲမှုလုပ်ငန်းများကို လျှော့ချနိုင်စေရန် Telegram Bot တစ်ခု တည်ဆောက်ထားခြင်းဖြစ်ပါသည်။",
+    image: "/projects/ce-23.png"
   },
 
   // ==========================================
