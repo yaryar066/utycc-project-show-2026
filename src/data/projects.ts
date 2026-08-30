@@ -1,16 +1,36 @@
 import { Project, MajorInfo } from "@/types/project";
 
 export const MAJORS_DATA: MajorInfo[] = [
-  { code: "IST", fullName: "Information Science and Technology", description: "Software engineering, cloud infrastructure, AI models, and full-stack enterprise systems." },
-  { code: "CE", fullName: "Computer Engineering", description: "Embedded hardware, IoT ecosystems, computer architecture, and low-level robotics integration." },
-  { code: "ECE", fullName: "Electronics and Communication Engineering", description: "Telecommunications, RF transmission, signal processing, and high-frequency circuit design." },
-  { code: "PrE", fullName: "Precision Engineering", description: "High-precision manufacturing, micro-machining, automated inspection, and CAD/CAM systems." },
-  { code: "AME", fullName: "Advanced Materials Engineering", description: "Nanomaterials, smart polymers, metallurgical synthesis, and composite material analysis." },
+  { 
+    code: "IST", 
+    fullName: "Information Science and Technology", 
+    description: "Software Development, Information Science, Computer Vision, Artificial Intelligence/Machine Learning/Deep Learning, Data Science, IoT, Web Mining, Networking & Security, Cloud Computing." 
+  },
+  { 
+    code: "CE", 
+    fullName: "Computer Engineering", 
+    description: "Computer hardware, embedded systems, IoT, computer architecture, networking, cybersecurity, AI/ML, edge computing, and intelligent hardware–software systems." 
+  },
+  { 
+    code: "ECE", 
+    fullName: "Electronics and Communication Engineering", 
+    description: "Telecommunications, RF transmission, signal processing, and high-frequency circuit design." 
+  },
+  { 
+    code: "PrE", 
+    fullName: "Precision Engineering", 
+    description: "High-precision manufacturing, micro-machining, automated inspection, and CAD/CAM systems." 
+  },
+  { 
+    code: "AME", 
+    fullName: "Advanced Materials Engineering", 
+    description: "Nanomaterials, smart polymers, metallurgical synthesis, and composite material analysis." 
+  },
 ];
 
 export const PROJECTS_DATA: Project[] = [
   // ==========================================
-  // 1. IST (21 Projects)
+  // 1. INFORMATION SCIENCE AND TECHNOLOGY (IST - 21 Projects)
   // ==========================================
   {
     id: "ist-01",
@@ -806,7 +826,7 @@ export const PROJECTS_DATA: Project[] = [
   },
   {
     id: "pre-04",
-    title: "Bluetooth-Controlled Robotic Hand",
+    title: "Wireless-Controlled Robotic Hand",
     major: "PrE",
     year: "4th Year",
     teamName: "4th Year Group II",

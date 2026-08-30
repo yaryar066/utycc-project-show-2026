@@ -87,8 +87,8 @@ export const MajorSection: React.FC<MajorSectionProps> = ({
           </p>
         </div>
 
-        {/* 5-Column Responsive Convergence Grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3.5 sm:gap-4 lg:gap-5">
+        {/* 5-Column Responsive Convergence Grid - items-stretch ထည့်ထားပါသည် */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3.5 sm:gap-4 lg:gap-5 items-stretch">
           {majors.map((major, idx) => {
             const isSelected = selectedMajor === major.code;
             const hasError = imageErrors[major.code];
@@ -98,7 +98,7 @@ export const MajorSection: React.FC<MajorSectionProps> = ({
                 key={major.code}
                 onClick={() => onSelectMajor(major.code)}
                 style={{ transitionDelay: `${idx * 80}ms` }}
-                className={`text-left p-4 sm:p-5 rounded-2xl flex flex-col justify-between group cursor-pointer relative overflow-hidden active:scale-95 transition-all duration-700 ease-out ${getConvergenceAnimation(
+                className={`text-left p-4 sm:p-5 rounded-2xl flex flex-col justify-between h-full group cursor-pointer relative overflow-hidden active:scale-95 transition-all duration-700 ease-out ${getConvergenceAnimation(
                   idx
                 )} ${
                   isSelected
@@ -110,7 +110,7 @@ export const MajorSection: React.FC<MajorSectionProps> = ({
                   <div className="absolute top-0 right-0 w-3.5 h-3.5 bg-cyan-400 [clip-path:polygon(100%_0,0_0,100%_100%)]" />
                 )}
 
-                <div>
+                <div className="flex-1">
                   <div className="flex items-center justify-between gap-2 mb-3.5 sm:mb-5">
                     <div className="relative w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-slate-900 border border-cyan-500/30 flex items-center justify-center overflow-hidden shadow-inner group-hover:scale-110 group-hover:border-cyan-400 transition-all duration-300 flex-shrink-0">
                       {!hasError ? (
@@ -137,7 +137,8 @@ export const MajorSection: React.FC<MajorSectionProps> = ({
                   <h3 className="font-bold text-xs sm:text-sm lg:text-base text-white mb-1.5 leading-snug group-hover:text-cyan-300 transition-colors">
                     {major.fullName}
                   </h3>
-                  <p className="text-[11px] sm:text-xs text-slate-400 line-clamp-2 sm:line-clamp-3 leading-relaxed font-light">
+                  {/* line-clamp ဖယ်ရှားထားပြီး စာအပြည့်အစုံ ပေါ်လာစေပါသည် */}
+                  <p className="text-[11px] sm:text-xs text-slate-400 leading-relaxed font-light">
                     {major.description}
                   </p>
                 </div>

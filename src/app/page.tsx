@@ -242,8 +242,8 @@ export default function HomePage() {
         {/* ========================================================================= */}
         {/* 3. MAJORS OVERVIEW SECTION */}
         {/* ========================================================================= */}
-        <section id="majors" className="py-10 border-t border-cyan-500/20">
-          <div className="text-center mb-8">
+        <section id="majors" className="py-8 border-t border-cyan-500/20">
+          <div className="text-center mb-6">
             <h2 className="text-xl sm:text-2xl font-bold uppercase text-white tracking-wide">
               Engineering Disciplines
             </h2>
@@ -252,7 +252,7 @@ export default function HomePage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 items-stretch">
             {MAJORS_DATA.map((major) => {
               const isSelected = selectedMajor === major.code;
               const hasError = majorLogoErrors[major.code];
@@ -266,14 +266,14 @@ export default function HomePage() {
                     const el = document.getElementById("showcase");
                     if (el) el.scrollIntoView({ behavior: "smooth" });
                   }}
-                  className={`cyber-card p-6 rounded-2xl cursor-pointer transition-all ${
+                  className={`cyber-card p-5 rounded-2xl cursor-pointer transition-all flex flex-col justify-start h-full min-h-[215px] sm:min-h-[225px] ${
                     isSelected
                       ? "border-cyan-400 shadow-[0_0_25px_rgba(6,182,212,0.4)] bg-cyan-950/30 scale-[1.02]"
                       : "hover:border-cyan-400/60"
                   }`}
                 >
                   <div
-                    className={`relative w-14 h-14 rounded-full border-2 border-cyan-400/80 shadow-[0_0_15px_rgba(6,182,212,0.25)] mb-4 overflow-hidden flex items-center justify-center p-1.5 ${
+                    className={`relative w-12 h-12 rounded-full border-2 border-cyan-400/80 shadow-[0_0_15px_rgba(6,182,212,0.25)] mb-3 overflow-hidden flex items-center justify-center p-1 flex-shrink-0 ${
                       isDarkLogo ? "bg-slate-950" : "bg-white"
                     }`}
                   >
@@ -283,7 +283,7 @@ export default function HomePage() {
                           src={`/logos/${major.code.toLowerCase()}.png`}
                           alt={`${major.code} Official Logo`}
                           fill
-                          sizes="56px"
+                          sizes="48px"
                           className="object-contain"
                           onError={() =>
                             setMajorLogoErrors((prev) => ({ ...prev, [major.code]: true }))
@@ -297,13 +297,14 @@ export default function HomePage() {
                     )}
                   </div>
 
-                  <span className="text-xs font-mono font-bold text-cyan-400 tracking-wider">
+                  <span className="text-[11px] font-mono font-bold text-cyan-400 tracking-wider">
                     {major.code}
                   </span>
-                  <h3 className="text-base font-bold text-white mb-2 leading-snug">
+                  <h3 className="text-sm sm:text-base font-bold text-white mb-1.5 leading-snug">
                     {major.fullName}
                   </h3>
-                  <p className="text-xs text-slate-400 leading-relaxed line-clamp-2">
+                  
+                  <p className="text-xs text-slate-300 leading-relaxed font-light">
                     {major.description}
                   </p>
                 </div>
